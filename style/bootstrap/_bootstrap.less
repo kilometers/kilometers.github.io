@@ -1,0 +1,135 @@
+// Core variables and mixins
+@import "_variables.less";
+@import "_mixins.less";
+
+// Reset
+@import "_normalize.less";
+@import "_print.less";
+
+// Core CSS
+@import "_scaffolding.less";
+@import "_type.less";
+@import "_code.less";
+@import "_grid.less";
+@import "_tables.less";
+@import "_forms.less";
+@import "_buttons.less";
+
+// Components
+@import "_component-animations.less";
+@import "_glyphicons.less";
+@import "_dropdowns.less";
+@import "_button-groups.less";
+@import "_input-groups.less";
+@import "_navs.less";
+@import "_navbar.less";
+@import "_breadcrumbs.less";
+@import "_pagination.less";
+@import "_pager.less";
+@import "_labels.less";
+@import "_badges.less";
+@import "_jumbotron.less";
+@import "_thumbnails.less";
+@import "_alerts.less";
+@import "_progress-bars.less";
+@import "_media.less";
+@import "_list-group.less";
+@import "_panels.less";
+@import "_wells.less";
+@import "_close.less";
+
+// Components w/ JavaScript
+@import "_modals.less";
+@import "_tooltip.less";
+@import "_popovers.less";
+@import "_carousel.less";
+
+// Utility classes
+@import "_utilities.less";
+@import "_responsive-utilities.less";
+
+// Additional Modifiers
+body, html {
+	background-color: @miles-bg;
+	height: 100%;
+}
+
+.shadow(@style, @c) when (iscolor(@c)) {
+  -webkit-box-shadow: @style @c;
+  -moz-box-shadow:    @style @c;
+  box-shadow:         @style @c;
+}
+.article {
+	background-color: #fff;
+	width:95%;
+	max-width: 540px;
+	display: inline-block;
+	float: right;
+	padding: 30px 30px;
+	margin: 30px 2px 10px 40px;
+	
+	.shadow(5px 5px 0px, saturate(@miles-blue, 20%));
+	
+	.date {
+		font-family: 'Ropa Sans', sans-serif;
+		color:gray;
+		float:right;
+	}
+	
+	.title {
+		font-family: 'Ropa Sans', sans-serif;
+		font-style: italic;
+	}
+	
+	.content {
+		color: @article-text-color;
+		font-family: 'Scada', sans-serif;
+	}
+	
+	a:link { color: @miles-red; }
+	a:visited { color: @miles-red; }
+}
+.sidebar {
+	background-color: @miles-bg-secondary;
+	height:100%;
+	width:100%;
+	position:fixed;
+}
+
+.widget-title {
+	color: @miles-red;
+}
+.widget {
+	a:link { color: lighten(@miles-gray, 10%); }
+	a:visited { color: @miles-gray; }
+}
+
+footer {
+	a:link { color: darken(@miles-gray, 50%); }
+	a:visited { color: darken(@miles-gray, 50%); }
+}
+
+.logo {
+	font-family: 'Ropa Sans', sans-serif;
+	//font-style: italic;
+	font-size: 90px;
+	float: left;
+	a{
+		color:white;
+	}
+	a:hover{
+		text-decoration:none;
+	}
+}
+.sub {
+	font-family: 'Scada', sans-serif;
+	font-style: italic;
+	float:left;
+	a{
+		color:white;
+	}
+}
+
+.fill { 
+    height: 100%;
+}
