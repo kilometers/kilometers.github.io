@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>A Quick Lesson in Regex - Miles
+    </title>
+    <link rel="alternate" href="http://localhost:8080/feed.xml" type="application/rss+xml">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ropa+Sans:400,400italic|Droid+Serif:400,700italic|Hammersmith+One|Scada:400italic,400|Francois+One">
+    <link rel="stylesheet" href="/style/main.css">
+  </head>
+  <body class="article-detail">
+    <div class="container-full fill">
+      <div class="row fill">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+          <div class="row">
+            <div id="content">
+              <div class="content-wrap">
+                <article class="article">
+                  <section class="content"><p>Regular expressions are insane. The ratio between their power and size is stupid.
+With a few lines of code, you can quickly reformat large data sets or locate impossibly
+well hidden text. If you haven’t taught yourself Regex, do yourself a favor. I’ll help get
+you started. First though, get a text editor that supports Regex. I like Notepad++.
+If you want to use something else, that’s&nbsp;fine.</p>
+<hr>
+<p>Here’s our mis-formatted&nbsp;data:</p>
+<pre><code>Sophia,F,22158
+Emma,F,20791
+Isabella,F,18931
+</code></pre><p>They’re the top 3 girls names in the <span class="caps">US</span> in 2012 (according to social security&nbsp;applications)</p>
+<p>Okay, so it’s not mis-formatted. The data looks okay, visually. But if you’re going to use this in a web app,
+you’ll want something with more meta-information. Ideally you’d have this data in a format
+such as <span class="caps">JSON</span> or XML. It might be easy enough to manually convert these three lines, but the file they
+came from has thousands of entries. And that’s just for the year 2012. The whole data set
+goes back to the late 1800’s. Have fun manually formatting +7 megabytes of&nbsp;data.</p>
+<p>Regex is your friend&nbsp;here.</p>
+<ul>
+<li><p>Open a new file in Notepad++ and paste the data from above. In the menu, go to Search &gt;&nbsp;Replace…</p>
+</li>
+<li><p>A new window should open with two fields: “Find what” and “Replace&nbsp;with”</p>
+</li>
+<li><p>In the “Find what” field, enter <code>(.&#42;),(.),([0-9]&#42;)</code></p>
+</li>
+<li><p>In the “Replace with” field, enter <code>{\n\t”name”: “$1”,\n\t”sex”: “$2”,\n\t”total”: $3\n},</code></p>
+</li>
+<li><p>Click “Replace&nbsp;All”</p>
+</li>
+</ul>
+<p>You should now see&nbsp;this:</p>
+<pre><code>{
+    "name": "Sophia",
+    "sex": "F",
+    "total": 22158
+},
+{
+    "name": "Emma",
+    "sex": "F",
+    "total": 20791
+},
+{
+    "name": "Isabella",
+    "sex": "F",
+    "total": 18931
+},
+</code></pre>
+
+<p>Viola! You’ve just saved yourself a visit to the asylum. However, before you still end up there
+out of sheer confusion regarding what you just did, let me&nbsp;explain.</p>
+<p>To reformat the data, you must first find it intelligently. Regex are symbols that can help
+target a search, and then some. Let’s start with looking at what the original data was made&nbsp;of:</p>
+<pre><code>Sophia,F,22158
+</code></pre><p>In each entry, there’s a <i>name</i>, <i>gender</i> and a <i>number</i> which represents how
+many children were given that name. What’s a name? There’s many ways of answering that, but
+to be quite boring, obvious, and technical, the names you find here are seemingly random
+groupings of letters. How can you make a search query match something as unpredictable as&nbsp;that?</p>
+<p>With <code>.</code></p>
+<p>In Regex, a period matches any single alphanumeric character. But how can I match
+multiple alphanumeric characters? Just tack on a <code>&#42;</code> symbol. The asterisk makes
+a single Regex term match itself to multiple, concurrent characters. Hence, <code>.&#42;</code>
+could match “Bob” just as well as it could match&nbsp;“Stephanie”.</p>
+<p>With the above information, you can probably figure out how to find the gender initial. If
+you guessed <code>.</code>, you’re&nbsp;correct!</p>
+<p>Now for the last part, the number, we could actually stick with a simple <code>.&#42;</code>, but
+there’s another way to do this. Within a set of <code>[]</code> square brackets, you can specify 
+a set of alphanumeric values to match. Since the numbers can have integers anywhere from 0 to 9,
+we can use <code>[0-9]&#42;</code> to match muliple concurrent integers. Sometimes it’s more
+predictable and controllable when you specify the type of characters you are searching&nbsp;for.</p>
+<p>Some of you have probably been wondering what to do with the commas. Good news! That’s easy.
+All you need is a <code>,</code> (Regex is usually straightforward when it comes to matching
+known characters and&nbsp;phrases)</p>
+<p>Let’s put it all together. Remember, we need to intelligently find a name with a gender and&nbsp;number.</p>
+<pre><code>.&#42;,.,[0-9]&#42;</code></pre>
+
+<p>If you go to the Find window (there’s a tab for it at the top of the Replace window), you can plug
+that in and hit “Find Next”. Doing this should result in a single entry being highlighted.&nbsp;Yay!</p>
+<p>Now&nbsp;what?</p>
+<p>If we’re going to actually do anything with the search results, we need to get fancier. All hail
+the <code>()</code> parentheses! These give you the might and power of <i>variables</i>! If you’re
+not swooning right now, you might not know what a variable is — if that’s the case, get thine butt to a basic
+programming&nbsp;tutorial.</p>
+<p>In Regex, when doing a replace, the term <code>$0</code> always represents the entire search result.
+Let’s take for example a result when matching the query we just created.
+If it was <code>Sophia,F,22158</code>, putting just <code>$0</code> in the “Replace with” field would
+not change anything. <code>$0</code> would simply replace our search result with&nbsp;itself.</p>
+<p>Parentheses expand on this though and allows us to assign sections of the search result to variables.
+This is very powerful. Let’s take the query we created earlier and add parentheses around the
+Regex expressions for the <i>name</i>, <i>gender</i> and <i>number</i>.</p>
+<pre><code>(.&#42;),(.),([0-9]&#42;)</code></pre>
+
+<p>If you enter this into the “Find what” field and hit “Find next”, nothing will appear to have changed.
+However, if you put <code>$1</code> in the “Replace with” field and hit “Replace All”, suddenly everything
+but the names are gone. Undo that and try <code>$2</code>, then <code>$3</code>. This is where the magic
+lies. Armed with knowledge of Regex variables, you just need to know a few more things to understand
+the replace&nbsp;code:</p>
+<ul>
+<li><code>\n</code> means “new line”. It’s what hitting your “Enter” key does in a word processor.
+It’s not necessary, but it makes for prettier&nbsp;formatting.</li>
+<li><code>\t</code> means “tab”. Again, not necessary, but indentation is&nbsp;prettierer.</li>
+</ul>
+<p>That’s all. Mix all of this together, and you get a “Replace with” entry as&nbsp;follows:</p>
+<pre><code>{\n\t"name": "$1",\n\t"sex": "$2",\n\t"total": $3\n},</code></pre>
+
+<p>This replaces the search result provided by <code>(.&#42;),(.),([0-9]&#42;)</code> with a <span class="caps">JSON</span> formatted
+object. With a few seconds of work, you can create a two line solution to reformatting an entire data
+set. Pretty&nbsp;cool!</p>
+</section>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <footer>
+              <div class="nav"><a href="/">« Full blog</a></div>
+              <section class="about">
+              </section>
+              <section class="copy">
+                <p>&copy; 2014 Miles &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a>
+                </p>
+              </section>
+            </footer>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4 hidden-xs fill">
+          <div class="sidebar">
+            <header class="header">
+              <h1>A Quick Lesson in Regex</h1>
+              <p class="author">Written by <span class="author"></span>
+              </p>
+            </header>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

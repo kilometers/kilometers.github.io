@@ -5775,11 +5775,11 @@ button.close {
 }
 body,
 html {
-  background-color: #78dee8;
+  background-color: #fffdf3;
   height: 100%;
 }
 .article {
-  background-color: #fff;
+  background-color: #eefbfc;
   width: 95%;
   max-width: 540px;
   display: inline-block;
@@ -5810,10 +5810,11 @@ html {
   color: #fa023c;
 }
 .sidebar {
-  background-color: #e11b49;
+  background-color: #fffdf3;
   height: 100%;
   width: 100%;
   position: fixed;
+  margin-left: 15px;
 }
 .widget-title {
   color: #fa023c;
@@ -5831,24 +5832,76 @@ footer a:visited {
   color: #3c3a34;
 }
 .logo {
+  display: block;
   font-family: 'Ropa Sans', sans-serif;
   font-size: 90px;
   float: left;
+  width: 100%;
+  height: 90px;
 }
 .logo a {
-  color: white;
+  color: #fa023c;
 }
 .logo a:hover {
   text-decoration: none;
 }
 .sub {
+  margin-left: 3px;
+  display: block;
   font-family: 'Scada', sans-serif;
   font-style: italic;
+  font-size: 30px;
   float: left;
 }
 .sub a {
   color: white;
 }
+.menu {
+  margin-left: 8px;
+}
+.menu li {
+  display: block;
+  float: left;
+  width: 100%;
+  font-family: 'Droid Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 30px;
+}
+.menu li a {
+  color: #bdbab2;
+}
+.menu li a:hover {
+  color: #fa023c;
+  text-decoration: none;
+}
 .fill {
   height: 100%;
+}
+.button-secondary {
+  display: inline-block;
+  background-color: #1e2125;
+  font-family: 'Droid Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+  float: right;
+  padding: 4px;
+  margin: 10px;
+  -webkit-box-shadow: 5px 5px 0px #fd184e;
+  -moz-box-shadow: 5px 5px 0px #fd184e;
+  box-shadow: 5px 5px 0px #fd184e;
+}
+.button-secondary a {
+  color: #69d0d3;
+}
+.button-secondary a:hover {
+  color: white;
+  text-decoration: none;
+}
+.button-secondary a:visited {
+  color: #69d0d3;
+}
+footer {
+  margin-top: 5px;
+  padding: 20px;
 }

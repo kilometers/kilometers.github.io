@@ -60,7 +60,7 @@ body, html {
   box-shadow:         @style @c;
 }
 .article {
-	background-color: #fff;
+	background-color: lighten(@miles-light-blue, 27%);
 	width:95%;
 	max-width: 540px;
 	display: inline-block;
@@ -68,7 +68,7 @@ body, html {
 	padding: 30px 30px;
 	margin: 30px 2px 10px 40px;
 	
-	.shadow(5px 5px 0px, saturate(@miles-blue, 20%));
+	.shadow(5px 5px 0px, @miles-blue);
 	
 	.date {
 		font-family: 'Ropa Sans', sans-serif;
@@ -94,6 +94,7 @@ body, html {
 	height:100%;
 	width:100%;
 	position:fixed;
+	margin-left: 15px;
 }
 
 .widget-title {
@@ -108,28 +109,70 @@ footer {
 	a:link { color: darken(@miles-gray, 50%); }
 	a:visited { color: darken(@miles-gray, 50%); }
 }
-
 .logo {
+	display:block;
 	font-family: 'Ropa Sans', sans-serif;
 	//font-style: italic;
 	font-size: 90px;
 	float: left;
+	width:100%;
+	height:90px;
 	a{
-		color:white;
+		color:@miles-red;
 	}
 	a:hover{
 		text-decoration:none;
 	}
 }
 .sub {
+	margin-left:3px;
+	display:block;
 	font-family: 'Scada', sans-serif;
 	font-style: italic;
-	float:left;
+	font-size:30px;
+	float:left;	
 	a{
+	
 		color:white;
 	}
 }
-
+.menu {
+	margin-left:8px;
+	li {
+		display:block;
+		float:left;
+		width:100%;
+		font-family: 'Droid Serif', serif;
+		font-style: italic;
+		font-weight:400;
+		font-size: 30px;
+		a{
+			color: @miles-gray;
+		}
+		a:hover{
+			color: @miles-red;
+			text-decoration:none;
+		}
+	}
+}
 .fill { 
     height: 100%;
+}
+.button-secondary {
+	display:inline-block;
+	background-color: @miles-dark;
+	font-family: 'Droid Serif', serif;
+	font-style: italic;
+	font-size: 15px;
+	float:right;
+	padding:4px;
+	margin:10px;
+	.shadow(5px 5px 0px, lighten(@miles-red, 5%));
+	a{color: @miles-blue;}
+	a:hover{color:white; text-decoration:none; }
+	a:visited{color: @miles-blue;}
+}
+footer {
+	margin-top: 5px;
+	padding:20px;
 }
