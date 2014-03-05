@@ -5891,15 +5891,15 @@ footer a:visited {
   -moz-box-shadow: 5px 5px 0px #fd184e;
   box-shadow: 5px 5px 0px #fd184e;
 }
-.button-secondary a {
+.button-secondary a:link {
+  color: #69d0d3;
+}
+.button-secondary a:visited {
   color: #69d0d3;
 }
 .button-secondary a:hover {
   color: white;
   text-decoration: none;
-}
-.button-secondary a:visited {
-  color: #69d0d3;
 }
 footer {
   margin-top: 5px;
